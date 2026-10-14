@@ -1,0 +1,509 @@
+react apps
+  Seri ❤️ Ippo 20 React programs-um romba simple code-la, beginner-friendly-ah kudukkuren. Periya functions illa, easy-ah memorize pannalaam. Ella code-um `src/App.jsx`-la thaniya paste pannanum.
+
+Project create panna:
+
+```
+npm create vite@latest myapp -- --template react
+cd myapp
+npm install
+npm run dev
+```
+
+## 1. To-Do List
+
+```
+import { useState } from "react";
+export default function App() {
+  const [task, setTask] = useState("");
+  const [list, setList] = useState([]);
+  return <div>
+    <h2>To-Do List</h2>
+    <input onChange={e => setTask(e.target.value)} />
+    <button onClick={() => setList([...list, task])}>Add</button>
+    {list.map((t, i) => <p key={i}>{t}</p>)}
+  </div>;
+}
+```
+
+## 2. Calculator
+
+```
+import { useState } from "react";
+export default function App() {
+  const [a, A] = useState(0);
+  const [b, B] = useState(0);
+  const [r, R] = useState(0);
+  return <div>
+    <h2>Calculator</h2>
+    <input type="number" onChange={e => A(+e.target.value)} />
+    <input type="number" onChange={e => B(+e.target.value)} />
+    <button onClick={() => R(a + b)}>Add</button>
+    <button onClick={() => R(a - b)}>Subtract</button>
+    <h3>Result: {r}</h3>
+  </div>;
+}
+```
+
+## 3. Quiz App
+
+```
+import { useState } from "react";
+export default function App() {
+  const [score, setScore] = useState(0);
+  return <div>
+    <h2>React is a?</h2>
+    <button onClick={() => setScore(score + 1)}>Library</button>
+    <button onClick={() => {}}>Database</button>
+    <h3>Score: {score}</h3>
+  </div>;
+}
+```
+
+## 4. Notes App
+
+```
+import { useState } from "react";
+export default function App() {
+  const [note, setNote] = useState("");
+  const [list, setList] = useState([]);
+  return <div>
+    <h2>Notes</h2>
+    <input onChange={e => setNote(e.target.value)} />
+    <button onClick={() => setList([...list, note])}>Add</button>
+    {list.map((n, i) => <p key={i}>{n}</p>)}
+  </div>;
+}
+```
+
+## 5. Temperature Converter
+
+```
+import { useState } from "react";
+export default function App() {
+  const [c, setC] = useState(0);
+  return <div>
+    <h2>Temperature</h2>
+    <input type="number" onChange={e => setC(+e.target.value)} />
+    <h3>Fahrenheit: {c * 9 / 5 + 32}</h3>
+  </div>;
+}
+```
+
+## 6. Expense Tracker
+
+```
+import { useState } from "react";
+export default function App() {
+  const [amount, setAmount] = useState(0);
+  const [total, setTotal] = useState(0);
+  return <div>
+    <h2>Expense Tracker</h2>
+    <input type="number" onChange={e => setAmount(+e.target.value)} />
+    <button onClick={() => setTotal(total + amount)}>Add Expense</button>
+    <h3>Total: ₹{total}</h3>
+  </div>;
+}
+```
+
+## 7. Contact Book
+
+```
+import { useState } from "react";
+export default function App() {
+  const [name, setName] = useState("");
+  const [list, setList] = useState([]);
+  return <div>
+    <h2>Contact Book</h2>
+    <input onChange={e => setName(e.target.value)} />
+    <button onClick={() => setList([...list, name])}>Add</button>
+    {list.map((n, i) => <p key={i}>{n}</p>)}
+  </div>;
+}
+```
+
+## 8. BMI Calculator
+
+```
+import { useState } from "react";
+export default function App() {
+  const [w, setW] = useState(0);
+  const [h, setH] = useState(1);
+  return <div>
+    <h2>BMI Calculator</h2>
+    <input placeholder="Weight kg" type="number" onChange={e => setW(+e.target.value)} />
+    <input placeholder="Height metre" type="number" onChange={e => setH(+e.target.value)} />
+    <h3>BMI: {w && h > 0 ? (w / (h * h)).toFixed(2) : ""}</h3>
+  </div>;
+}
+```
+
+## 9. News App
+
+```
+import { useEffect, useState } from "react";
+export default function App() {
+  const [news, setNews] = useState([]);
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/posts?_limit=5")
+      .then(r => r.json()).then(d => setNews(d));
+  }, []);
+  return <div>
+    <h2>News App</h2>
+    {news.map(n => <p key={n.id}>{n.title}</p>)}
+  </div>;
+}
+```
+
+Note: Idhu sample posts; live news feed illa.
+
+## 10. Dictionary App
+
+```
+import { useState } from "react";
+export default function App() {
+  const [word, setWord] = useState("");
+  const [meaning, setMeaning] = useState("");
+  return <div>
+    <h2>Dictionary</h2>
+    <input onChange={e => setWord(e.target.value)} />
+    <button onClick={() => fetch("https://api.dictionaryapi.dev/api/v2/entries/en/" + word)
+      .then(r => r.json()).then(d => setMeaning(d[0].meanings[0].definitions[0].definition))
+      .catch(() => setMeaning("Word not found"))}>Search</button>
+    <p>{meaning}</p>
+  </div>;
+}
+```
+
+## 11. Currency Converter
+
+```
+import { useState } from "react";
+export default function App() {
+  const [rupees, setRupees] = useState(0);
+  return <div>
+    <h2>Currency Converter</h2>
+    <input type="number" onChange={e => setRupees(+e.target.value)} />
+    <h3>USD: {(rupees / 85).toFixed(2)}</h3>
+  </div>;
+}
+```
+
+Note: Example rate mattum; live currency rate illa.
+
+## 12. Recipe Finder
+
+```
+import { useState } from "react";
+export default function App() {
+  const [food, setFood] = useState("");
+  const [result, setResult] = useState([]);
+  return <div>
+    <h2>Recipe Finder</h2>
+    <input onChange={e => setFood(e.target.value)} />
+    <button onClick={() => fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=" + food)
+      .then(r => r.json()).then(d => setResult(d.meals || []))}>Search</button>
+    {result.map(x => <p key={x.idMeal}>{x.strMeal}</p>)}
+  </div>;
+}
+```
+
+## 13. Book Finder
+
+```
+import { useState } from "react";
+export default function App() {
+  const [book, setBook] = useState("");
+  const [list, setList] = useState([]);
+  return <div>
+    <h2>Book Finder</h2>
+    <input onChange={e => setBook(e.target.value)} />
+    <button onClick={() => fetch("https://www.googleapis.com/books/v1/volumes?q=" + book)
+      .then(r => r.json()).then(d => setList(d.items || []))}>Search</button>
+    {list.map(b => <p key={b.id}>{b.volumeInfo.title}</p>)}
+  </div>;
+}
+```
+
+## 14. Form Validation
+
+```
+import { useState } from "react";
+export default function App() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [msg, setMsg] = useState("");
+  return <div>
+    <h2>Login Form</h2>
+    <input placeholder="Email" onChange={e => setEmail(e.target.value)} />
+    <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
+    <button onClick={() => setMsg(email.includes("@") && password.length >= 6 ? "Valid" : "Invalid")}>Login</button>
+    <p>{msg}</p>
+  </div>;
+}
+```
+
+## 15. Dark / Light Theme
+
+```
+import { useState } from "react";
+export default function App() {
+  const [dark, setDark] = useState(false);
+  return <div style={{ background: dark ? "black" : "white", color: dark ? "white" : "black", padding: 30 }}>
+    <h2>Theme App</h2>
+    <button onClick={() => setDark(!dark)}>Change Theme</button>
+  </div>;
+}
+```
+
+## 16. Counter App
+
+```
+import { useState } from "react";
+export default function App() {
+  const [count, setCount] = useState(0);
+  return <div>
+    <h2>{count}</h2>
+    <button onClick={() => setCount(count + 1)}>+</button>
+    <button onClick={() => setCount(count - 1)}>-</button>
+  </div>;
+}
+```
+
+## 17. Age Calculator
+
+```
+import { useState } from "react";
+export default function App() {
+  const [year, setYear] = useState("");
+  return <div>
+    <h2>Age Calculator</h2>
+    <input type="number" placeholder="Birth year" onChange={e => setYear(e.target.value)} />
+    <h3>Age: {year ? new Date().getFullYear() - year : ""}</h3>
+  </div>;
+}
+```
+
+## 18. Calendar Picker
+
+```
+import { useState } from "react";
+export default function App() {
+  const [date, setDate] = useState("");
+  return <div>
+    <h2>Calendar Picker</h2>
+    <input type="date" onChange={e => setDate(e.target.value)} />
+    <h3>Selected Date: {date}</h3>
+  </div>;
+}
+```
+
+## 19. Discount Calculator
+
+```
+import { useState } from "react";
+export default function App() {
+  const [price, setPrice] = useState(0);
+  const [discount, setDiscount] = useState(0);
+  return <div>
+    <h2>Discount Calculator</h2>
+    <input type="number" placeholder="Price" onChange={e => setPrice(+e.target.value)} />
+    <input type="number" placeholder="Discount %" onChange={e => setDiscount(+e.target.value)} />
+    <h3>Final Price: ₹{price - price * discount / 100}</h3>
+  </div>;
+}
+```
+
+## 20. Shopping Bill Calculator
+
+```
+import { useState } from "react";
+export default function App() {
+  const [price, setPrice] = useState(0);
+  const [qty, setQty] = useState(0);
+  return <div>
+    <h2>Shopping Bill</h2>
+    <input type="number" placeholder="Price" onChange={e => setPrice(+e.target.value)} />
+    <input type="number" placeholder="Quantity" onChange={e => setQty(+e.target.value)} />
+    <h3>Total: ₹{price * qty}</h3>
+  </div>;
+}
+```
+
+## Easy-ah remember panna
+
+Ella programs-layum indha pattern repeat aagum:
+
+```
+import { useState } from "react";
+
+const [value, setValue] = useState("");
+
+<input onChange={e => setValue(e.target.value)} />
+
+<button onClick={() => setValue("Done")}>Click</button>
+
+<h3>{value}</h3>
+```
+
+pipeline {
+    agent any 
+    stages{
+        stage('Clone Repository'){
+            steps{
+                git branch:'main',
+                     url:'https://github.com/24104106-sketch/Devops-React-application.git'
+            }
+        }
+        stage('Install Dependencies'){
+            steps{
+                bat 'call npm ci'
+            }
+        }
+        stage('Build React App'){
+            steps{
+            bat 'npm run build'
+            }
+        }
+        stage('Archeive dist'){
+            steps{
+                archiveArtifacts artifacts:'dist/**'
+            }
+        }
+    }
+    post{
+        success{
+            echo 'React app built successfully'
+        }
+        failure{
+            echo 'Failed to built react app!!'
+        }
+    }
+}
+
+dockerfile
+  FROM node:22-alpine AS build
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+RUN npm run build
+
+FROM nginx:alpine
+
+COPY --from=build /app/dist /usr/share/nginx/html
+
+EXPOSE 80
+
+
+dockercmd
+  ## Docker Practical — Full Command List
+
+First, VS Code terminal open panni project folder-kulla po:
+
+```
+cd C:\Users\dheiv\OneDrive\Desktop\devopPractice\student-app
+```
+
+### 1. Docker installed-ah check pannu
+
+```
+docker --version
+docker info
+```
+
+### 2. Docker image build pannu
+
+Project root-la `Dockerfile` and `.dockerignore` already create pannirukkanum.
+
+```
+docker build -t student-app .
+```
+
+### 3. Image create aachanu check pannu
+
+```
+docker images
+```
+
+### 4. Container run pannu
+
+```
+docker run -d -p 8081:80 --name student-container student-app
+```
+
+### 5. Container running-ah check pannu
+
+```
+docker ps
+```
+
+All containers status paaka:
+
+```
+docker ps -a
+```
+
+### 6. Browser-la application open pannu
+
+[http://localhost:8081 — Student Registration App](http://localhost:8081)
+
+### 7. Container logs paaka
+
+```
+docker logs student-container
+```
+
+Live logs paaka:
+
+```
+docker logs -f student-container
+```
+
+### 8. Container stop / start pannu
+
+```
+docker stop student-container
+docker start student-container
+```
+
+### 9. Container remove pannu
+
+First stop panni, apram remove pannu.
+
+```
+docker stop student-container
+docker rm student-container
+```
+
+### 10. Docker image remove pannu
+
+```
+docker rmi student-app
+```
+
+### 11. GitHub-la Dockerfile upload panna
+
+```
+git add .
+git commit -m "Add Docker configuration"
+git push
+
+
+## Exam-ku important commands
+
+| Command                                                         | Use                               |
+| --------------------------------------------------------------- | --------------------------------- |
+| `docker build -t student-app .`                                 | Image build pannum                |
+| `docker images`                                                 | Images list kaattum               |
+| `docker run -d -p 8081:80 --name student-container student-app` | Container create panni run pannum |
+| `docker ps`                                                     | Running containers kaattum        |
+| `docker ps -a`                                                  | All containers kaattum            |
+| `docker logs student-container`                                 | Container logs kaattum            |
+| `docker stop student-container`                                 | Container stop pannum             |
+| `docker start student-container`                                | Container restart pannum          |
+| `docker rm student-container`                                   | Container remove pannum           |
+| `docker rmi student-app`                                        | Image remove pannum
